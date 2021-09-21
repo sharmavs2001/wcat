@@ -56,6 +56,25 @@ else {
                 contentOfFile = removeAll(contentOfFile, "sc")   //   "/r/n is representation of"
 
             }
+
+
+            if (flag == "-s")   
+            {
+                contentOfFile = addSequence(contentOfFile)   ;
+            }
+
+            if (flag == "-sn")    
+            {
+                contentOfFile = addSequenceToNonEmptyLines(contentOfFile) ; 
+
+            }
+
+            if (flag == "-rel")    
+            {
+                contentOfFile = removeExtraLine(contentOfFile) ; 
+
+            }
+
         }
 
         for(sec_arg of secondaryarguments)
@@ -87,3 +106,44 @@ function removeAll(fileData, toRemove) {
 
 }
  
+
+
+
+function addSequence(contentOfFile) {
+
+    let conArr = contentOfFile.split('\r\n');
+    for(let i=0; i<conArr.length; i++ )
+     {
+        conArr[i]=i+1 + " " + conArr[i];
+     }
+
+     return conArr;
+}
+
+
+
+function addSequenceToNonEmptyLines(contentOfFile) {
+    let conArr = contentOfFile.split('\r\n');
+    for(let i=0; i<conArr.length && i<10; i++ )
+     {
+         if(conArr[i]!="")
+         conArr[i]=i+1 + " " + conArr[i];
+     }
+
+     return conArr;
+
+}
+
+
+function removeExtraLine(contentOfFile) {
+    let conArr = contentOfFile.split('\r\n');
+    let ans="";
+    for(let i=0; i<conArr.length && i<10; i++ )
+     {
+         if(conArr[i]!="")
+          ans+=conArr[i] + "\r\n";
+     }
+
+     return ans;
+
+}
